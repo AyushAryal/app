@@ -18,22 +18,24 @@ class ItemListings extends StatefulWidget {
 
 class _ItemListingsState extends State<ItemListings> {
   late Future<Paginated<Item>> itemsFuture;
+  final searchController = TextEditingController();
 
   @override
   void initState() {
     final service = ItemService();
 
-    final token = Provider.of<TokenProvider>(context, listen: false).getToken();
-    if (token != null) {
-      itemsFuture = service.list(token: token.token);
-    } else {
-      itemsFuture = Future.error("");
-    }
+    final token =
+        Provider.of<TokenProvider>(context, listen: false).getToken()!;
+    itemsFuture = service.list(token: token.token);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final service = ItemService();
+    final token =
+        Provider.of<TokenProvider>(context, listen: false).getToken()!;
+
     return FutureBuilder(
       future: itemsFuture,
       builder: (context, snapshot) {
@@ -70,6 +72,28 @@ class _ItemListingsState extends State<ItemListings> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: searchController,
+                        decoration: const InputDecoration(hintText: 'Search'),
+                      ),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          final query = searchController.text;
+                          setState(() {
+                            if (token != null) {
+                              itemsFuture = service.list(
+                                  token: token.token, query: query);
+                            }
+                          });
+                        },
+                        icon: Icon(Icons.search)),
                   ],
                 ),
                 const SizedBox(height: 20),

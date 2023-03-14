@@ -10,9 +10,10 @@ class ItemService extends BaseService {
   ItemService();
   ItemService.from(String server) : super.from(server);
 
-  Future<Paginated<Item>> list({required String token, Uri? page}) async {
+  Future<Paginated<Item>> list(
+      {required String token, Uri? page, String? query}) async {
     final response = await http.get(
-      page ?? Uri.parse("$server/item/"),
+      page ?? Uri.parse("$server/item/?search=${query ?? ''}"),
       headers: getDefaultHeaders(token: token),
     );
     assertGeneralErrors(response);
