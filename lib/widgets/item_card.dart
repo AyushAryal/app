@@ -32,27 +32,29 @@ class ItemCard extends StatelessWidget {
                 ),
           Container(
             decoration: BoxDecoration(color: Colors.black.withAlpha(150)),
+            height: 250.0,
             padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
+                const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      item.name,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    RatingWidget(
-                      rating: item.rating,
-                      inactiveColor: Colors.white70,
-                    ),
-                  ],
+                Text(
+                  item.name.toTitleCase(),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  item.user.email,
+                  style: const TextStyle(color: Colors.grey),
+                ),
+                const SizedBox(height: 5),
+                RatingWidget(
+                  itemId: item.id,
+                  inactiveColor: Colors.white70,
                 ),
                 Wrap(
                   spacing: 8.0, // gap between adjacent chips
@@ -73,10 +75,6 @@ class ItemCard extends StatelessWidget {
                         )
                         .toList(),
                   ],
-                ),
-                Text(
-                  item.user.email,
-                  style: const TextStyle(color: Colors.white),
                 ),
               ],
             ),

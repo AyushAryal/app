@@ -20,10 +20,10 @@ class ItemVariantListing extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 20.0),
-          Text(
-            "${item.itemVariants.length} Variants by vendor",
-            style: const TextStyle(
-              fontSize: 25,
+          const Text(
+            "Variants by vendor",
+            style: TextStyle(
+              fontSize: 35,
             ),
           ),
           const SizedBox(height: 20.0),

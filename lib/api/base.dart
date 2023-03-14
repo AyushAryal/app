@@ -22,7 +22,7 @@ class BaseService {
 
   void assertGeneralErrors(http.Response response) {
     if (response.statusCode != 200) {
-      final contentType = response.headers["Content-Type"] ?? "";
+      final contentType = response.headers["content-type"] ?? "";
       if (contentType.contains("application/json")) {
         final json = jsonDecode(response.body);
         if (json["detail"] != null) {

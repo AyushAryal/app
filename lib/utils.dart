@@ -20,3 +20,11 @@ extension ColorBrightness on Color {
     return hslLight.toColor();
   }
 }
+
+extension TitleCase on String {
+  String toTitleCase() {
+    return split(" ")
+        .map((w) => "${w[0].toUpperCase()}${w.substring(1).toLowerCase()}")
+        .join(" ");
+  }
+}
