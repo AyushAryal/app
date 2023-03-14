@@ -12,7 +12,7 @@ class TokenProvider extends ChangeNotifier {
     this.token = token;
     final prefs = await SharedPreferences.getInstance();
     if (token != null) {
-      prefs.setString("token", token.token);
+      prefs.setString("token", token.toJson());
     } else {
       prefs.remove("token");
     }
