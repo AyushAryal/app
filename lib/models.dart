@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:app/api/api.dart';
+import 'package:app/api/models/token.dart';
 
-class Token extends ChangeNotifier {
-  String? _token;
+class TokenProvider extends ChangeNotifier {
+  Token? token;
 
-  Token(this._token);
-  String? getToken() => _token;
+  TokenProvider({this.token});
+  Token? getToken() => token;
 
-  void setToken(String? token) async {
-    _token = token;
-    if (token != null) {
-      API.token = token;
-    } else {
-      API.token = "";
-    }
+  void setToken(Token? token) async {
+    this.token = token;
     final prefs = await SharedPreferences.getInstance();
     if (token != null) {
-      prefs.setString("token", token);
+      prefs.setString("token", token.token);
     } else {
       prefs.remove("token");
     }

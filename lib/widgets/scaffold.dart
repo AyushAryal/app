@@ -1,5 +1,7 @@
-import 'package:app/page/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:app/models.dart';
 
 class CustomScaffold extends StatelessWidget {
   final Widget body;
@@ -17,17 +19,14 @@ class CustomScaffold extends StatelessWidget {
         title: const Text('FARMERZ'),
         actions: showActions
             ? [
-                IconButton(
-                    icon: const Icon(Icons.person),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                            builder: (BuildContext context) =>
-                                const ProfilePage()),
-                      );
-                    }),
+                IconButton(icon: const Icon(Icons.person), onPressed: () {}),
                 const SizedBox(width: 8),
+                IconButton(
+                    icon: const Icon(Icons.logout),
+                    onPressed: () {
+                      Provider.of<TokenProvider>(context, listen: false)
+                          .setToken(null);
+                    })
               ]
             : null,
       ),
