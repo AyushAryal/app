@@ -63,7 +63,7 @@ class ItemCard extends StatelessWidget {
                           (x) => Chip(
                             label: Text(
                               x.name,
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
                             visualDensity: VisualDensity.compact,
                             backgroundColor: Colors.primaries[

@@ -28,6 +28,15 @@ class Item {
             .map((x) => ItemVariant.fromJson(x as Map<String, dynamic>))
             .toList();
 
+  ItemVariant? getVariant(int variantId) {
+    for (final variant in itemVariants) {
+      if (variant.id == variantId) {
+        return variant;
+      }
+    }
+    return null;
+  }
+
   Uri? getTitleImageUri() {
     for (final variant in itemVariants) {
       for (final image in variant.images) {

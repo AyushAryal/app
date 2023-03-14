@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:app/models.dart';
+import 'package:app/page/cart.dart';
 
 class CustomScaffold extends StatelessWidget {
   final Widget body;
@@ -21,6 +22,16 @@ class CustomScaffold extends StatelessWidget {
             ? [
                 IconButton(icon: const Icon(Icons.person), onPressed: () {}),
                 const SizedBox(width: 8),
+                IconButton(
+                    icon: const Icon(Icons.shopping_cart),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CartPage(),
+                        ),
+                      );
+                    }),
                 IconButton(
                     icon: const Icon(Icons.logout),
                     onPressed: () {

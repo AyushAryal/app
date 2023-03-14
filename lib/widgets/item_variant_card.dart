@@ -1,5 +1,10 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+
+import 'package:app/models.dart';
 import 'package:app/api/models/item_variant.dart';
+import 'package:app/api/services/cart.dart';
+import 'package:app/page/cart.dart';
 
 class ItemVariantCard extends StatelessWidget {
   final ItemVariant variant;
@@ -7,6 +12,10 @@ class ItemVariantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final token =
+        Provider.of<TokenProvider>(context, listen: false).getToken()!;
+    final service = CartService();
+
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: [
@@ -40,9 +49,20 @@ class ItemVariantCard extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  OutlinedButton(
-                    onPressed: () {},
-                    child: const Icon(Icons.shopping_cart_checkout_outlined),
+                  IconButton(
+                    color: Colors.white,
+                    onPressed: () async {
+                      await service.addItemVariant(token.token, variant.id);
+                      if (context.mounted) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CartPage(),
+                          ),
+                        );
+                      }
+                    },
+                    icon: const Icon(Icons.shopping_cart_checkout_outlined),
                   )
                 ],
               ),
