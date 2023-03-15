@@ -105,7 +105,7 @@ class _RatingWidgetState extends State<RatingWidget> {
                     Icon(Icons.stars, color: widget.activeColor),
                     const SizedBox(width: 5),
                     Text(
-                      "${rating.item}/5",
+                      "${rating.item.toStringAsFixed(2)}/5",
                       style: TextStyle(color: widget.activeColor),
                     ),
                   ],

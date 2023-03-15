@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:app/widgets/scaffold.dart';
 import 'package:app/widgets/item_listings.dart';
+import 'package:app/widgets/recommendations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -71,6 +72,7 @@ class _HomePageState extends State<HomePage>
             ),
           ],
         ),
+        const Recommendations(),
         const ItemListings(),
       ],
     ));

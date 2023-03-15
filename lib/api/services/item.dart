@@ -30,6 +30,21 @@ class ItemService extends BaseService {
     return jsonDecode(response.body) as int;
   }
 
+  Future<List<Item>> recommendations({required String token}) async {
+    final response = await http.get(
+      Uri.parse("$server/item/recommend"),
+      headers: getDefaultHeaders(token: token),
+    );
+    assertGeneralErrors(response);
+
+    final json = List<int>.from(jsonDecode(response.body));
+    List<Item> results = [];
+    for (final id in json) {
+      results.add(await get(token: token, id: id));
+    }
+    return results;
+  }
+
   Future<Paginated<Item>> list(
       {required String token, Uri? page, String? query}) async {
     final response = await http.get(
